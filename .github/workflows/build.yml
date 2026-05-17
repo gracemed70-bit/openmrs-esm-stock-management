@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4   # Updated to v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4 # Updated to v4
         with:
-          node-version: 18   # Match OpenMRS requirements
+          node-version: 18
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -26,7 +26,7 @@ jobs:
         run: yarn build
 
       - name: Upload dist folder
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4   # ✅ Updated to v4
         with:
           name: dist
           path: dist
