@@ -651,9 +651,7 @@ const CreateReport: React.FC<CreateReportProps> = ({ model, closeWorkspace }) =>
         <Button kind="secondary" onClick={() => closeWorkspace()} className={styles.button}>
           {getCoreTranslation('cancel')}
         </Button>
-       // <Button type="submit" className={styles.button}>
-       // <Button type="submit" className={styles.button} onClick={handleSave}>  
-+        <Button type="submit" className={styles.button} onClick={handleSubmit(handleSave)}>
+        <Button type="submit" className={styles.button} onClick={handleSubmit(handleSave)}>
           {getCoreTranslation('save')}
         </Button>
       </ButtonSet>
