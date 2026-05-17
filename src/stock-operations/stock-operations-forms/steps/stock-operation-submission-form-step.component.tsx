@@ -25,7 +25,6 @@ type StockOperationSubmissionFormStepProps = {
   dismissWorkspace?: () => void;
 };
 
-const { sourceParties, destinationParties } = useParties(stockOperationType);
 const StockOperationSubmissionFormStep: React.FC<StockOperationSubmissionFormStepProps> = ({
   onPrevious,
   stockOperationType,
@@ -42,6 +41,7 @@ const StockOperationSubmissionFormStep: React.FC<StockOperationSubmissionFormSte
     () => OperationType.STOCK_ISSUE_OPERATION_TYPE === stockOperationType.operationType,
     [stockOperationType],
   );
+  const { sourceParties, destinationParties } = useParties(stockOperationType);
   const handleRadioButtonChange = (selectedItem: boolean) => {
     setApprovalRequired(selectedItem);
   };
