@@ -173,12 +173,21 @@ const AddStockUserRoleScope: React.FC<AddStockUserRoleScopeProps> = ({ model, ed
       setFormModel({ ...formModel, locations: newLocations });
     }
   };
-
+  
+  const onEnableDescendantsChanged = (locationUuid: string): void => {  
+     const newLocations = (formModel.locations ?? []).map((loc) =>  
+       loc.locationUuid === locationUuid  
+         ? { ...loc, enableDescendants: !loc.enableDescendants }  
+         : loc,  
+     );  
+     setFormModel({ ...formModel, locations: newLocations });  
+  };
+  
   const findCheckedLocation = (location: fhir.Location): UserRoleScopeLocation | null => {
     const result = formModel?.locations?.filter((x) => x.locationUuid === location.id);
     return result && result.length > 0 ? result[0] : null;
   };
-
+  
   const onActiveDatesChange = (dates: Date[]): void => {
     setFormModel({ ...formModel, activeFrom: dates[0], activeTo: dates[1] });
   };
@@ -406,7 +415,8 @@ const AddStockUserRoleScope: React.FC<AddStockUserRoleScopeProps> = ({ model, ed
                       id={`tg-loc-child-${type.id}`}
                       key={`tg-loc-child-key-${type.id}`}
                       toggled={getToggledValue(type.id)}
-                      size="sm"
+                      onToggle={() => onEnableDescendantsChanged(type.id)} 
+                      size="sm" 
                     />
                   )}
                 </div>
@@ -414,6 +424,7 @@ const AddStockUserRoleScope: React.FC<AddStockUserRoleScopeProps> = ({ model, ed
             })}
         </CheckboxGroup>
       </Stack>
+      
       <ButtonSet
         className={classNames(styles.buttonSet, {
           [styles.tablet]: isTablet,
