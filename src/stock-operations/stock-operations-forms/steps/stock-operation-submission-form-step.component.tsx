@@ -83,6 +83,10 @@ const StockOperationSubmissionFormStep: React.FC<StockOperationSubmissionFormSte
         // construct update payload
         const payload = {
           ...formData,
+          atLocationUuid:  
+             sourceParties.find((p) => p.uuid === formData.sourceUuid)?.locationUuid ??  
+              destinationParties.find((p) => p.uuid === formData.destinationUuid)?.locationUuid,  
+          
           // Remove other uuid if responsible person is set to other
           responsiblePersonUuid:
             formData.responsiblePersonUuid === otherUser.uuid ? undefined : formData.responsiblePersonUuid,
@@ -123,8 +127,8 @@ const StockOperationSubmissionFormStep: React.FC<StockOperationSubmissionFormSte
       }
     })(); // Call handleSubmit to trigger validation and submission
     return result; // Return the result after handleSubmit completes
-  }, [form, stockOperation, t, approvalRequired, isStockIssueOperation, dismissWorkspace]);
-
+  }, [form, stockOperation, t, approvalRequired, isStockIssueOperation, dismissWorkspace,
+      sourceParties, destinationParties]);
   const handleComplete = useCallback(() => {
     handleSave().then((operation) => {
       launchStockOperationsModal('Complete', false, { ...operation, status: 'COMPLETED' });
