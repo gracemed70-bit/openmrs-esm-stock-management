@@ -374,7 +374,7 @@ const CreateReport: React.FC<CreateReportProps> = ({ model, closeWorkspace }) =>
   };
 
   return (
-    <Form className={styles.container}>
+    <Form onSubmit={handleSubmit(handleSave)} className={styles.container}>
       <Stack className={styles.form} gap={5}>
         <>
           <FormGroup legendText={t('reportName', 'Report name')}>
