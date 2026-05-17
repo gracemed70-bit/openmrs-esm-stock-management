@@ -15,6 +15,7 @@ import { type StockOperationItemDTO } from '../../../core/api/types/stockOperati
 import { type StockOperationItemDtoSchema } from '../../validation-schema';
 import useOperationTypePermisions from '../hooks/useOperationTypePermisions';
 import styles from '../stock-operation-form.scss';
+import useParties from '../hooks/useParties';
 
 type StockOperationSubmissionFormStepProps = {
   onPrevious?: () => void;
@@ -24,6 +25,7 @@ type StockOperationSubmissionFormStepProps = {
   dismissWorkspace?: () => void;
 };
 
+const { sourceParties, destinationParties } = useParties(stockOperationType);
 const StockOperationSubmissionFormStep: React.FC<StockOperationSubmissionFormStepProps> = ({
   onPrevious,
   stockOperationType,
